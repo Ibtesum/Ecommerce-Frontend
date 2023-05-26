@@ -1,19 +1,22 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import thunk from "redux-thunk";
+import { cartReducer } from "./reducers/cartReducers";
 import {
   productDetailReducer,
   productListReducer,
 } from "./reducers/productReducers";
-import { cartReducer } from "./reducers/cartReducers";
 
+import { orderCreateReducer, orderDetailsReducer, orderPayReducer } from "./reducers/orderReducers";
 import {
+  userDeleteReducer,
+  userDetailsReducer,
+  userListReducer,
   userLoginReducer,
   userRegisterReducer,
-  userDetailsReducer,
   userUpdateProfileReducer,
+  userUpdateReducer
 } from "./reducers/userReducers";
-import { json } from "react-router-dom";
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -22,7 +25,13 @@ const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
+  userUpdate: userUpdateReducer,
+  userList: userListReducer,
+  userDelete: userDeleteReducer,
   userUpdateProfile: userUpdateProfileReducer,
+  orderCreate: orderCreateReducer,
+  orderDetails: orderDetailsReducer,
+  orderPay: orderPayReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")
