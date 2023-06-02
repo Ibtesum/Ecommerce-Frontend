@@ -7,7 +7,7 @@ import {
 } from "../constants/cartConstants";
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
-  const { data } = await axios.get(`/api/products/${id}`);
+  const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`);
 
   dispatch({
     type: CART_ADD_ITEM,
