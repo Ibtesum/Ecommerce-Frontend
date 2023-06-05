@@ -23,11 +23,11 @@ import {
   PRODUCT_UPDATE_SUCCESS,
 } from "../constants/productConstants";
 
-export const listProduct = () => async (dispatch) => {
+export const listProduct = (keyword="", pageNumber="") => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
 
-    const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products`);
+    const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products?keyword=${keyword}&pageNumber=${pageNumber}`);
 
     dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
   } catch (error) {

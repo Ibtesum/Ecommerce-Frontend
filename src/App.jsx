@@ -9,6 +9,7 @@ import ProductScreen from "./screens/ProductScreen";
 import { Container } from "react-bootstrap";
 import CartScreen from "./screens/CartScreen";
 import LoginScreen from "./screens/LoginScreen";
+import OrderListScreen from "./screens/OrderListScreen";
 import OrderScreen from "./screens/OrderScreen";
 import PaymentScreen from "./screens/PaymentScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
@@ -28,15 +29,21 @@ function App() {
         <Container>
           <Routes>
             <Route path="/admin/userlist" element={<UserListScreen />} />
-            <Route path="/admin/productlist" element={<ProductListScreen />} />
+            <Route path="/admin/orderlist" element={<OrderListScreen />} />
+            <Route
+              exact
+              path="/admin/productlist"
+              element={<ProductListScreen />}
+            />
+            <Route
+              exact
+              path="/admin/productlist/:pageNumber"
+              element={<ProductListScreen />}
+            />
             <Route
               path="/admin/product/:id/edit"
               element={<ProductEditScreen />}
             />
-            {/* <Route
-              path="/admin/product/:id/edit"
-              element={<ProductEditScreen />}
-            /> */}
             <Route path="/admin/user/:id/edit" element={<UserEditScreen />} />
             <Route path="/order/:id" element={<OrderScreen />} />
             <Route path="/shipping" element={<ShippingScreen />} />
@@ -48,6 +55,12 @@ function App() {
             <Route path="/product/:id" element={<ProductScreen />} />
             <Route path="/cart/:id?" element={<CartScreen />} />
             <Route exact path="/" element={<HomeScreen />} />
+            <Route path="/search/:keyword" element={<HomeScreen />} />
+            <Route
+              path="/search/:keyword/page/:pageNumber"
+              element={<HomeScreen />}
+            />
+            <Route path="page/:pageNumber" element={<HomeScreen />} />
           </Routes>
         </Container>
       </main>

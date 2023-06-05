@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Form, Button, Col } from "react-bootstrap";
+import { Button, Col, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import FormContainer from "../components/FormContainer";
-import CheckoutSteps from "../components/CheckoutSteps";
-import { savePaymentMethod } from "../actions/cartActions";
 import { useNavigate } from "react-router-dom";
+import { savePaymentMethod } from "../actions/cartActions";
+import CheckoutSteps from "../components/CheckoutSteps";
+import FormContainer from "../components/FormContainer";
 
 const PaymentScreen = () => {
   const navigate = useNavigate();
@@ -35,14 +35,13 @@ const PaymentScreen = () => {
           <Col>
             <Form.Check
               type="radio"
-              label="SSL Commerce"
-              id="PayPal"
+              label="Stripe Payment"
+              id="stripe"
               name="paymentMethod"
-              value="SSL Commerce"
-              
+              value="stripe"
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check>
-            <Form.Check
+            {/* <Form.Check
               type='radio'
               label='Cash On Delivery'
               id='Stripe'
@@ -50,11 +49,11 @@ const PaymentScreen = () => {
               value='COD'
               checked
               onChange={(e) => setPaymentMethod(e.target.value)}
-            ></Form.Check>
+            ></Form.Check> */}
           </Col>
         </Form.Group>
 
-        <Button type="submit" variant="primary">
+        <Button className="my-3" type="submit" variant="primary">
           Continue
         </Button>
       </Form>

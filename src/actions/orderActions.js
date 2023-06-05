@@ -259,3 +259,43 @@ export const listOrders = () => async (dispatch, getState) => {
     });
   }
 };
+
+export const payOrderStripe =
+  (id, stripeToken, totalPrice) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ORDER_PAY_REQUEST,
+      })
+
+      const {
+        userLogin: { userInfo },
+      } = getState()
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+
+      const { data } = await axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/orders/${id}/stripe`,
+        { stripeToken, totalPrice },
+        config
+      )
+      console.log("data ;", data)
+
+      dispatch({
+        type: ORDER_PAY_SUCCESS,
+        payload: data,
+      })
+    } catch (error) {
+      dispatch({
+        type: ORDER_PAY_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
+  }
